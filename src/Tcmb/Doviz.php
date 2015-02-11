@@ -2,31 +2,33 @@
 
 namespace Teknomavi\Tcmb;
 
-use Doctrine\Common\Cache\CacheProvider;
 use GuzzleHttp\Client as HttpClient;
 
 class Doviz
 {
 
-    /* Kurlar */
-    const CURRENCY_USD = "USD"; //ABD DOLARI
-    const CURRENCY_AUD = "AUD"; //AVUSTRALYA DOLARI
-    const CURRENCY_DKK = "DKK"; //DANİMARKA KRONU
-    const CURRENCY_EUR = "EUR"; //EURO
-    const CURRENCY_GBP = "GBP"; //İNGİLİZ STERLİNİ
-    const CURRENCY_CHF = "CHF"; //İSVİÇRE FRANGI
-    const CURRENCY_SEK = "SEK"; //İSVEÇ KRONU
-    const CURRENCY_CAD = "CAD"; //KANADA DOLARI
-    const CURRENCY_KWD = "KWD"; //KUVEYT DİNARI
-    const CURRENCY_NOK = "NOK"; //NORVEÇ KRONU
-    const CURRENCY_SAR = "SAR"; //SUUDİ ARABİSTAN RİYALİ
-    const CURRENCY_JPY = "JPY"; //JAPON YENİ
-    const CURRENCY_BGN = "BGN"; //BULGAR LEVASI
-    const CURRENCY_RON = "RON"; //RUMEN LEYİ
-    const CURRENCY_RUB = "RUB"; //RUS RUBLESİ
-    const CURRENCY_IRR = "IRR"; //İRAN RİYALİ
-    const CURRENCY_CNY = "CNY"; //ÇİN YUANI
-    const CURRENCY_PKR = "PKR"; //PAKİSTAN RUPİSİ
+    /* Kur İsimleri */
+    public $names = array(
+        "USD" => "ABD DOLARI",
+        "AUD" => "AVUSTRALYA DOLARI",
+        "DKK" => "DANİMARKA KRONU",
+        "EUR" => "EURO",
+        "GBP" => "İNGİLİZ STERLİNİ",
+        "CHF" => "İSVİÇRE FRANGI",
+        "SEK" => "İSVEÇ KRONU",
+        "CAD" => "KANADA DOLARI",
+        "KWD" => "KUVEYT DİNARI",
+        "NOK" => "NORVEÇ KRONU",
+        "SAR" => "SUUDİ ARABİSTAN RİYALİ",
+        "JPY" => "JAPON YENİ",
+        "BGN" => "BULGAR LEVASI",
+        "RON" => "RUMEN LEYİ",
+        "RUB" => "RUS RUBLESİ",
+        "IRR" => "İRAN RİYALİ",
+        "CNY" => "ÇİN YUANI",
+        "PKR" => "PAKİSTAN RUPİSİ"
+    );
+
     /* KurTipleri */
     const TYPE_ALIS = "ForexBuying";
     const TYPE_EFEKTIFALIS = "BanknoteBuying";
@@ -50,21 +52,23 @@ class Doviz
     /**
      * Datanın cachelenmesi için gerekli driver
      *
-     * @var CacheProvider
+     * @var \Doctrine\Common\Cache\CacheProvider
      */
     private $cacheDriver = null;
 
     private $cacheKey = "Teknomavi_Tcmb_Doviz_Data";
 
     /**
-     * @param CacheProvider $cacheDriver
+     * @param \Doctrine\Common\Cache\CacheProvider $cacheDriver
      */
-    function __construct(CacheProvider $cacheDriver = null)
+    function __construct($cacheDriver = null)
     {
-        if (!is_null($cacheDriver)) {
-            $this->cacheDriver = $cacheDriver;
-            if ($this->cacheDriver->contains($this->cacheKey)) {
-                $this->data = $this->cacheDriver->fetch($this->cacheKey);
+        if (!is_null($cacheDriver) && class_exists('\Doctrine\Common\Cache\CacheProvider')) {
+            if ($cacheDriver instanceof \Doctrine\Common\Cache\CacheProvider) {
+                $this->cacheDriver = $cacheDriver;
+                if ($this->cacheDriver->contains($this->cacheKey)) {
+                    $this->data = $this->cacheDriver->fetch($this->cacheKey);
+                }
             }
         }
     }

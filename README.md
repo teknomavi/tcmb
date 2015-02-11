@@ -1,4 +1,4 @@
-# Teknomavi\Tcmb
+# T.C. Merkez Bankası Kur Kütüphanesi
 ## Teknomavi\Tcmb Nedir ?
 T.C. Merkez Bankası tarafından http://www.tcmb.gov.tr/kurlar/today.xml adresinde yayınlanan güncel döviz kurlarını çeken açık kaynaklı bir PHP kütüphanesidir.
 
@@ -11,10 +11,8 @@ Teknomavi\Tcmb composer ile kurulabilir.
 
 Kütüphaneyi ta
 ```php
-
 use Teknomavi\Tcmb\Doviz;
 $doviz = new Doviz($cacheDriver);
-
 ```
 
 ## Sıkça Sorulan Sorular
@@ -25,7 +23,6 @@ Doctrine Cache hakkında detaylı bilgiye [buradan](http://doctrine-orm.readthed
 
 Örnek: Doctrine Memcache CacheProvider ile kullanımı
 ```php
-
 use Teknomavi\Tcmb\Doviz;
 
 // Doctrine Memcache Init
@@ -39,7 +36,6 @@ echo " USD Alış:" . $doviz->kurAlis("USD");
 echo " USD Satış:" . $doviz->kurSatis("EUR");
 echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", Doviz::TYPE_EFEKTIFALIS);
 echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", Doviz::TYPE_EFEKTIFSATIS);
-
 ```
 
 ### Doctrine\Common\Cache\CacheProvider harici bir önbellek yapısı kullanıyorum. Ne yapabilirim?
@@ -47,7 +43,6 @@ Sınıfın oluşturduğu data değişkenini getData() fonksiyonu kendiniz saklay
  
 Örnek: json_encode/json_decode ile önbelleğin bir dosyada tutulması
 ```php
-
 $doviz = new \Teknomavi\Tcmb\Doviz();
 // Cache Kodları Başlangıç
 $fileName   = dirname(__FILE__) . "/data.json";
@@ -66,5 +61,4 @@ echo " USD Alış:" . $doviz->kurAlis("USD");
 echo " USD Satış:" . $doviz->kurSatis("EUR");
 echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", Doviz::TYPE_EFEKTIFALIS);
 echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", Doviz::TYPE_EFEKTIFSATIS);
-
 ```
