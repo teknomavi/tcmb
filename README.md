@@ -7,12 +7,18 @@ Bu kütüphane ile günlük döviz kurları otomatik olarak çekilmektedir.
 TCMB sitesinde yayınlanan tüm kurlar için mevcut "Alış", "Satış", "Efektif Alış" ve "Efektif Satış" değerlerine ulaşabilirsiniz. 
 
 ## Nasıl Kullanılır ?
-Teknomavi\Tcmb composer ile kurulabilir.
+Teknomavi\Tcmb composer ile kurulabilir. 
+Projenizdeki composer.json dosyasında require bölümüne "teknomavi/tcmb": "dev-master" eklemeniz ve composer update komutunu çalıştırmanız yeterlidir. 
 
-Kütüphaneyi ta
+Kütüphanenin en temel kullanımı aşağıdaki gibidir;
 ```php
 use Teknomavi\Tcmb\Doviz;
-$doviz = new Doviz($cacheDriver);
+$doviz = new Doviz();
+echo " USD Alış:" . $doviz->kurAlis("USD");
+echo " USD Satış:" . $doviz->kurSatis("EUR");
+echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", Doviz::TYPE_EFEKTIFALIS);
+echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", Doviz::TYPE_EFEKTIFSATIS);
+
 ```
 
 ## Sıkça Sorulan Sorular
@@ -36,6 +42,7 @@ echo " USD Alış:" . $doviz->kurAlis("USD");
 echo " USD Satış:" . $doviz->kurSatis("EUR");
 echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", Doviz::TYPE_EFEKTIFALIS);
 echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", Doviz::TYPE_EFEKTIFSATIS);
+
 ```
 
 ### Doctrine\Common\Cache\CacheProvider harici bir önbellek yapısı kullanıyorum. Ne yapabilirim?
@@ -61,4 +68,5 @@ echo " USD Alış:" . $doviz->kurAlis("USD");
 echo " USD Satış:" . $doviz->kurSatis("EUR");
 echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", Doviz::TYPE_EFEKTIFALIS);
 echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", Doviz::TYPE_EFEKTIFSATIS);
+
 ```
