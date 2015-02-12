@@ -30,11 +30,9 @@
     "doctrine/cache": "Kütüphanenin cache mekanizmasını kullanmasını sağlayarak performansını arttırır."
   },
   "autoload": {
-    "psr-0": {"Teknomavi\\Tcmb\\": "src/"},
-    "psr-4": {"Teknomavi\\Tcmb\\": "src/"}
+    "psr-4": {"Teknomavi\\Tcmb\\": "src/Tcmb/"}
   },
   "autoload-dev": {
-    "psr-0": {"Teknomavi\\Tcmb\\Tests\\": "tests/"},
-    "psr-4": {"Teknomavi\\Tcmb\\Tests\\": "tests/"}
+    "psr-4": {"Teknomavi\\Tcmb\\": "tests/Tcmb/"}
   }
 }

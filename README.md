@@ -66,7 +66,7 @@ if (!$cacheValid) {
 // Cache Kodları Bitiş
 echo " USD Alış:" . $doviz->kurAlis("USD");
 echo " USD Satış:" . $doviz->kurSatis("EUR");
-echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", Doviz::TYPE_EFEKTIFALIS);
-echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", Doviz::TYPE_EFEKTIFSATIS);
+echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", \Teknomavi\Tcmb\Doviz::TYPE_EFEKTIFALIS);
+echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", \Teknomavi\Tcmb\Doviz::TYPE_EFEKTIFSATIS);
 
 ```
