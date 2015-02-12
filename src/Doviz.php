@@ -81,14 +81,14 @@ class Doviz
         $client     = new HttpClient();
         $response   = $client->get("http://www.tcmb.gov.tr/kurlar/today.xml");
         $this->data = $this->formatTcmbData((array)simplexml_load_string($response->getBody()));
+        if ($this->data['today'] == date("d.m.Y")) {
+            $expire = strtotime("Tomorrow 15:30");
+        } else {
+            $expire = strtotime("Today 15:30");
+        }
+        $this->data['expire'] = $expire;
         if (!is_null($this->cacheDriver)) {
-            if ($this->data['today'] == date("d.m.Y")) {
-                $expire = strtotime("Tomorrow 15:30");
-            } else {
-                $expire = strtotime("Today 15:30");
-            }
-            $this->data['expire'] = $expire;
-            $lifetime             = $expire - time();
+            $lifetime = $expire - time();
             $this->cacheDriver->save($this->cacheKey, $this->data, $lifetime > 0 ? $lifetime : 30 * 60);
         }
     }
@@ -111,7 +111,6 @@ class Doviz
                     continue;
                 }
                 $currencies[$currencyCode] = array(
-                    "CurrencyName"          => $currency["Isim"],
                     self::TYPE_ALIS         => $currency[self::TYPE_ALIS] / $currency['Unit'],
                     self::TYPE_EFEKTIFALIS  => $currency[self::TYPE_EFEKTIFALIS] / $currency['Unit'],
                     self::TYPE_SATIS        => $currency[self::TYPE_SATIS] / $currency['Unit'],

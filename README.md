@@ -52,13 +52,12 @@ Sınıfın oluşturduğu data değişkenini getData() fonksiyonu kendiniz saklay
 ```php
 $doviz = new \Teknomavi\Tcmb\Doviz();
 // Cache Kodları Başlangıç
-$fileName   = dirname(__FILE__) . "/data.json";
-$cacheValid = false;
+$fileName = dirname(__FILE__) . "/data.json";
 if (file_exists($fileName)) {
-    $data = json_decode(file_get_contents($fileName));
-    if ($doviz->setData($data)) {
-        $cacheValid = true;
-    }
+    $data       = json_decode(file_get_contents($fileName), true);
+    $cacheValid = $doviz->setData($data);
+} else {
+    $cacheValid = false;
 }
 if (!$cacheValid) {
     file_put_contents($fileName, json_encode($doviz->getData()));
