@@ -1,6 +1,7 @@
 {
   "name": "teknomavi/tcmb",
-  "description": "T.C. Merkez Bankası üzerinden güncel kurları çeker",
+  "type": "library",
+  "description": "T.C. Merkez Bankası üzerinden güncel döviz kurlarını çeker",
   "minimum-stability": "dev",
   "license": "MIT",
   "keywords": [
@@ -21,8 +22,7 @@
     "issues": "https://github.com/teknomavi/tcmb/issues"
   },
   "require": {
-    "php": "> 5.3.0",
-    "guzzlehttp/guzzle": "5.0.*@dev"
+    "php": "> 5.3.0"
   },
   "require-dev": {},
   "suggest": {

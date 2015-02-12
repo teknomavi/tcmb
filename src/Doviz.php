@@ -2,8 +2,6 @@
 
 namespace Teknomavi\Tcmb;
 
-use GuzzleHttp\Client as HttpClient;
-
 class Doviz
 {
 
@@ -75,12 +73,22 @@ class Doviz
 
     /**
      * TCMB sitesi üzerinden XML'i okur.
+     *
+     * @throws Exception\ConnectionFailed
      */
     private function getTcmbData()
     {
-        $client     = new HttpClient();
-        $response   = $client->get("http://www.tcmb.gov.tr/kurlar/today.xml");
-        $this->data = $this->formatTcmbData((array)simplexml_load_string($response->getBody()));
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "http://www.tcmb.gov.tr/kurlar/today.xml");
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        $response = curl_exec($ch);
+        if ($response === false) {
+            throw new Exception\ConnectionFailed("Sunucu Bağlantısı Kurulamadı: " . curl_error($ch));
+        }
+        curl_close($ch);
+        $this->data = $this->formatTcmbData((array)simplexml_load_string($response));
         if ($this->data['today'] == date("d.m.Y")) {
             $expire = strtotime("Tomorrow 15:30");
         } else {
