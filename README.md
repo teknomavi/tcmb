@@ -46,7 +46,7 @@ echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", Doviz::TYPE_EFEKTIFSATIS
 ```
 
 ### Doctrine\Common\Cache\CacheProvider harici bir önbellek yapısı kullanıyorum. Ne yapabilirim?
-Sınıfın oluşturduğu data değişkenini getData() fonksiyonu kendiniz saklayıp, tekrar oluşturduğunuzda setData($data) fonksiyonu ile sınıfa tekrar verebilirsiniz.
+Sınıfın oluşturduğu data değişkenini getData() fonksiyonu kendiniz saklayıp, tekrar kullanacağınızda setData($data) fonksiyonu ile sınıfa tekrar verebilirsiniz.
  
 Örnek: json_encode/json_decode ile önbelleğin bir dosyada tutulması
 ```php

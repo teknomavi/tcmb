@@ -140,13 +140,13 @@ class Doviz
         if (is_null($this->data)) {
             $this->getTcmbData();
         }
-        if (!isset($this->data[$currency])) {
+        if (!isset($this->data['currencies'][$currency])) {
             throw new Exception\UnknownCurrencyCode("Tanımlanmayan Kur: " . $currency);
         }
         switch ($type) {
             case self::TYPE_ALIS:
             case self::TYPE_EFEKTIFALIS:
-                return (float)$this->data[$currency][$type];
+                return (float)$this->data['currencies'][$currency][$type];
             default:
                 throw new Exception\UnknownPriceType("Tanımlanamayan Kur Tipi: " . $type);
         }
@@ -167,13 +167,13 @@ class Doviz
         if (is_null($this->data)) {
             $this->getTcmbData();
         }
-        if (!isset($this->data[$currency])) {
+        if (!isset($this->data['currencies'][$currency])) {
             throw new Exception\UnknownCurrencyCode("Tanımlanmayan Kur: " . $currency);
         }
         switch ($type) {
             case self::TYPE_SATIS:
             case self::TYPE_EFEKTIFSATIS:
-                return (float)$this->data[$currency][$type];
+                return (float)$this->data['currencies'][$currency][$type];
             default:
                 throw new Exception\UnknownPriceType("Tanımlanamayan Kur Tipi: " . $type);
         }
