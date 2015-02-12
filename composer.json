@@ -24,7 +24,9 @@
   "require": {
     "php": "> 5.3.0"
   },
-  "require-dev": {},
+  "require-dev": {
+    "doctrine/cache": "dev-master"
+  },
   "suggest": {
     "doctrine/cache": "Kütüphanenin cache mekanizmasını kullanmasını sağlayarak performansını arttırır."
   },

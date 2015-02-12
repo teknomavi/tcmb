@@ -54,6 +54,11 @@ class Doviz
      */
     private $cacheDriver = null;
 
+    /**
+     * CacheProvider için kullanılacak önbellek anahtarı
+     *
+     * @var string
+     */
     private $cacheKey = "Teknomavi_Tcmb_Doviz_Data";
 
     /**
@@ -89,15 +94,19 @@ class Doviz
         }
         curl_close($ch);
         $this->data = $this->formatTcmbData((array)simplexml_load_string($response));
-        if ($this->data['today'] == date("d.m.Y")) {
-            $expire = strtotime("Tomorrow 15:30");
+        $timezone   = new \DateTimeZone('Europe/Istanbul');
+        $now        = new \DateTime("now", $timezone);
+        if ($this->data['today'] == $now->format("d.m.Y")) {
+            $expire = "Tomorrow 15:30";
         } else {
-            $expire = strtotime("Today 15:30");
+            $expire = "Today 15:30";
         }
-        $this->data['expire'] = $expire;
+        $expireDate           = new \DateTime($expire, $timezone);
+        $this->data['expire'] = $expireDate->getTimestamp();
         if (!is_null($this->cacheDriver)) {
-            $lifetime = $expire - time();
-            $this->cacheDriver->save($this->cacheKey, $this->data, $lifetime > 0 ? $lifetime : 30 * 60);
+            $lifetime = $expire - $now->getTimestamp();
+            // Eğer dosyanın geçerlilik süresi bitmişse veriyi sadece 5 dakika önbellekte tutuyoruz.
+            $this->cacheDriver->save($this->cacheKey, $this->data, $lifetime > 0 ? $lifetime : 300);
         }
     }
 
