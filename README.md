@@ -10,6 +10,9 @@ TCMB sitesinde yayınlanan tüm kurlar için mevcut "Alış", "Satış", "Efekti
 Teknomavi\Tcmb composer ile kurulabilir. 
 Projenizdeki composer.json dosyasında require bölümüne "teknomavi/tcmb": "dev-master" eklemeniz ve composer update komutunu çalıştırmanız yeterlidir. 
 
+composer kurulumu/kullanımı hakkında bilgiye ihtiyacınız varsa [bu bağlantıdaki](http://www.teknomavi.com/yazilim/php/composer-paket-yoneticisi-nedir-nasil-kurulur-nasil-kullanilir/) dökümanı incelebilirsiniz.
+
+### Örnek Kod
 Kütüphanenin en temel kullanımı aşağıdaki gibidir;
 ```php
 use Teknomavi\Tcmb\Doviz;
