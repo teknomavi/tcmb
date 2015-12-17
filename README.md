@@ -1,6 +1,6 @@
 # T.C. Merkez Bankası Kur Kütüphanesi
 ## Teknomavi\Tcmb Nedir ?
-T.C. Merkez Bankası tarafından http://www.tcmb.gov.tr/kurlar/today.xml adresinde yayınlanan güncel döviz kurlarını çeken açık kaynaklı bir PHP kütüphanesidir.
+T.C. Merkez Bankası tarafından http://www.tcmb.gov.tr/kurlar/today.xml adresinde yayınlanan güncel döviz kurlarını okumak için kullanılan açık kaynak bir PHP kütüphanesidir.
 
 ## Neler Yapılabilir ?
 Bu kütüphane ile günlük döviz kurları otomatik olarak çekilmektedir. 
@@ -8,7 +8,7 @@ TCMB sitesinde yayınlanan tüm kurlar için mevcut "Alış", "Satış", "Efekti
 
 ## Nasıl Kullanılır ?
 Teknomavi\Tcmb composer ile kurulabilir. 
-Projenizdeki composer.json dosyasında require bölümüne "teknomavi/tcmb": "dev-master" eklemeniz ve composer update komutunu çalıştırmanız yeterlidir. 
+Projenizdeki composer.json dosyasında require bölümüne *"teknomavi/tcmb": "dev-master"* eklemeniz ve *composer update* komutunu çalıştırmanız yeterlidir. 
 
 composer kurulumu/kullanımı hakkında bilgiye ihtiyacınız varsa [bu bağlantıdaki](http://www.teknomavi.com/yazilim/php/composer-paket-yoneticisi-nedir-nasil-kurulur-nasil-kullanilir/) dökümanı incelebilirsiniz.
 
@@ -18,7 +18,7 @@ Kütüphanenin en temel kullanımı aşağıdaki gibidir;
 use Teknomavi\Tcmb\Doviz;
 $doviz = new Doviz();
 echo " USD Alış:" . $doviz->kurAlis("USD");
-echo " USD Satış:" . $doviz->kurSatis("EUR");
+echo " USD Satış:" . $doviz->kurSatis("USD");
 echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", Doviz::TYPE_EFEKTIFALIS);
 echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", Doviz::TYPE_EFEKTIFSATIS);
 
@@ -26,9 +26,9 @@ echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", Doviz::TYPE_EFEKTIFSATIS
 
 ## Sıkça Sorulan Sorular
 ### Kütüphanenin Her Seferinde TCMB Üzerinden Data Çekmesi Nasıl Engellenir?
-TCMB Sitesinden çekilen veriler sınıfı oluştururken vereceğiniz bir Doctrine\Common\Cache\CacheProvider üzerinde tutulabilir. 
+TCMB Sitesinden çekilen veriler, sınıfı oluştururken vereceğiniz bir Doctrine\Common\Cache\CacheProvider üzerinde tutulabilir. 
 Bu sayede her seferinde tcmb sitesinden çekilmeyeceği için performans artışı sağlanabilir.
-Doctrine Cache hakkında detaylı bilgiye [buradan](http://doctrine-orm.readthedocs.org/en/latest/reference/caching.html} ulaşabilirsiniz.
+Doctrine Cache hakkında detaylı bilgiye [buradan](http://doctrine-orm.readthedocs.org/en/latest/reference/caching.html) ulaşabilirsiniz.
 
 Örnek: Doctrine Memcache CacheProvider ile kullanımı
 ```php
@@ -42,7 +42,7 @@ $cacheDriver->setMemcache($memcache);
 // Doviz Kütüphanesi
 $doviz = new Doviz($cacheDriver);
 echo " USD Alış:" . $doviz->kurAlis("USD");
-echo " USD Satış:" . $doviz->kurSatis("EUR");
+echo " USD Satış:" . $doviz->kurSatis("USD");
 echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", Doviz::TYPE_EFEKTIFALIS);
 echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", Doviz::TYPE_EFEKTIFSATIS);
 
@@ -67,7 +67,7 @@ if (!$cacheValid) {
 }
 // Cache Kodları Bitiş
 echo " USD Alış:" . $doviz->kurAlis("USD");
-echo " USD Satış:" . $doviz->kurSatis("EUR");
+echo " USD Satış:" . $doviz->kurSatis("USD");
 echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", \Teknomavi\Tcmb\Doviz::TYPE_EFEKTIFALIS);
 echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", \Teknomavi\Tcmb\Doviz::TYPE_EFEKTIFSATIS);
 
