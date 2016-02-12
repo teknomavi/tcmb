@@ -22,18 +22,24 @@
     "issues": "https://github.com/teknomavi/tcmb/issues"
   },
   "require": {
-    "php": "> 5.3.0"
+    "php": "> 5.4",
+    "teknomavi/common": "dev-master"
   },
   "require-dev": {
-    "doctrine/cache": "dev-master"
+    "doctrine/cache": "1.5.x-dev",
+    "phpunit/phpunit": "4.8.x-dev"
   },
   "suggest": {
     "doctrine/cache": "Kütüphanenin cache mekanizmasını kullanmasını sağlayarak performansını arttırır."
   },
   "autoload": {
-    "psr-4": {"Teknomavi\\Tcmb\\": "src/"}
+    "psr-4": {
+      "Teknomavi\\Tcmb\\": "src/"
+    }
   },
   "autoload-dev": {
-    "psr-4": {"Teknomavi\\Tcmb\\": "tests/"}
+    "psr-4": {
+      "Teknomavi\\Tcmb\\": "tests/"
+    }
   }
 }
