@@ -55,7 +55,7 @@ class Doviz
     /**
      * @param \Doctrine\Common\Cache\CacheProvider $cacheDriver
      */
-    function __construct($cacheDriver = null)
+    public function __construct($cacheDriver = null)
     {
         if (!is_null($cacheDriver) && class_exists('\Doctrine\Common\Cache\CacheProvider')) {
             if ($cacheDriver instanceof \Doctrine\Common\Cache\CacheProvider) {

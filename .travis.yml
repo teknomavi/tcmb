@@ -8,10 +8,9 @@ php:
 
 before_script:
     - phpenv rehash
-    - composer install --dev
+    - composer install
 
 script:
     - find ./src/ -name "*.php" -exec php -l {} \;
-    - php scripts/phpcs CodeSniffer.php CodeSniffer --standard=PSR2 --report=full src
+    - vendor/bin/phpcs --standard=PSR2 --report=full src
     - vendor/bin/phpunit --configuration phpunit.xml --coverage-text
-
