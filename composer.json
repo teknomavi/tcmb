@@ -27,7 +27,8 @@
   },
   "require-dev": {
     "doctrine/cache": "1.5.x-dev",
-    "phpunit/phpunit": "4.8.x-dev"
+    "phpunit/phpunit": "4.8.x-dev",
+    "squizlabs/php_codesniffer": "~2.0"
   },
   "suggest": {
     "doctrine/cache": "Kütüphanenin cache mekanizmasını kullanmasını sağlayarak performansını arttırır."
