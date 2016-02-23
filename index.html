@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>TCMB by teknomavi</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>TCMB</h1>
+        <h2>T.C. Merkez Bankası Döviz Kurları</h2>
+        <a href="https://github.com/teknomavi/tcmb" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="tc-merkez-bankası-kur-kütüphanesi-" class="anchor" href="#tc-merkez-bankas%C4%B1-kur-k%C3%BCt%C3%BCphanesi-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>T.C. Merkez Bankası Kur Kütüphanesi <a href="https://travis-ci.org/teknomavi/tcmb"><img src="https://travis-ci.org/teknomavi/tcmb.svg?branch=master" alt="Build Status"></a>
+</h1>
+
+<h2>
+<a id="teknomavitcmb-nedir-" class="anchor" href="#teknomavitcmb-nedir-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Teknomavi\Tcmb Nedir ?</h2>
+
+<p>T.C. Merkez Bankası tarafından <a href="http://www.tcmb.gov.tr/kurlar/today.xml">http://www.tcmb.gov.tr/kurlar/today.xml</a> adresinde yayınlanan güncel döviz kurlarını okumak için kullanılan açık kaynak bir PHP kütüphanesidir.</p>
+
+<h2>
+<a id="neler-yapılabilir-" class="anchor" href="#neler-yap%C4%B1labilir-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Neler Yapılabilir ?</h2>
+
+<p>Bu kütüphane ile günlük döviz kurları otomatik olarak çekilmektedir.
+TCMB sitesinde yayınlanan tüm kurlar için mevcut "Alış", "Satış", "Efektif Alış" ve "Efektif Satış" değerlerine ulaşabilirsiniz.</p>
+
+<h2>
+<a id="nasıl-kullanılır-" class="anchor" href="#nas%C4%B1l-kullan%C4%B1l%C4%B1r-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Nasıl Kullanılır ?</h2>
+
+<p>Teknomavi\Tcmb composer ile kurulabilir.
+Projenizdeki composer.json dosyasında require bölümüne <em>"teknomavi/tcmb": "dev-master"</em> eklemeniz ve <em>composer update</em> komutunu çalıştırmanız yeterlidir.</p>
+
+<p>composer kurulumu/kullanımı hakkında bilgiye ihtiyacınız varsa <a href="http://www.teknomavi.com/yazilim/php/composer-paket-yoneticisi-nedir-nasil-kurulur-nasil-kullanilir/">bu bağlantıdaki</a> dökümanı incelebilirsiniz.</p>
+
+<h3>
+<a id="Örnek-kod" class="anchor" href="#%C3%96rnek-kod" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Örnek Kod</h3>
+
+<p>Kütüphanenin en temel kullanımı aşağıdaki gibidir;</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">Teknomavi\Tcmb\Doviz</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$doviz</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Doviz</span>();</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> USD Alış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurAlis(<span class="pl-s"><span class="pl-pds">"</span>USD<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> USD Satış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurSatis(<span class="pl-s"><span class="pl-pds">"</span>USD<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> EURO Efektif Alış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurAlis(<span class="pl-s"><span class="pl-pds">"</span>EUR<span class="pl-pds">"</span></span>, <span class="pl-c1">Doviz</span><span class="pl-k">::</span><span class="pl-c1">TYPE_EFEKTIFALIS</span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> EURO Efektif Satış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurSatis(<span class="pl-s"><span class="pl-pds">"</span>EUR<span class="pl-pds">"</span></span>, <span class="pl-c1">Doviz</span><span class="pl-k">::</span><span class="pl-c1">TYPE_EFEKTIFSATIS</span>);</span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="sıkça-sorulan-sorular" class="anchor" href="#s%C4%B1k%C3%A7a-sorulan-sorular" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sıkça Sorulan Sorular</h2>
+
+<h3>
+<a id="kütüphanenin-her-seferinde-tcmb-Üzerinden-data-Çekmesi-nasıl-engellenir" class="anchor" href="#k%C3%BCt%C3%BCphanenin-her-seferinde-tcmb-%C3%9Czerinden-data-%C3%87ekmesi-nas%C4%B1l-engellenir" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Kütüphanenin Her Seferinde TCMB Üzerinden Data Çekmesi Nasıl Engellenir?</h3>
+
+<p>TCMB Sitesinden çekilen veriler, sınıfı oluştururken vereceğiniz bir Doctrine\Common\Cache\CacheProvider üzerinde tutulabilir.
+Bu sayede her seferinde tcmb sitesinden çekilmeyeceği için performans artışı sağlanabilir.
+Doctrine Cache hakkında detaylı bilgiye <a href="http://doctrine-orm.readthedocs.org/en/latest/reference/caching.html">buradan</a> ulaşabilirsiniz.</p>
+
+<p>Örnek: Doctrine Memcache CacheProvider ile kullanımı</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">Teknomavi\Tcmb\Doviz</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Doctrine Memcache Init</span></span>
+<span class="pl-s1"><span class="pl-smi">$memcache</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Memcache</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$memcache</span><span class="pl-k">-&gt;</span>connect(<span class="pl-s"><span class="pl-pds">'</span>localhost<span class="pl-pds">'</span></span>, <span class="pl-c1">11211</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$cacheDriver</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">\Doctrine\Common\Cache\</span><span class="pl-c1">MemcacheCache</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$cacheDriver</span><span class="pl-k">-&gt;</span>setMemcache(<span class="pl-smi">$memcache</span>);</span>
+<span class="pl-s1"><span class="pl-c">// Doviz Kütüphanesi</span></span>
+<span class="pl-s1"><span class="pl-smi">$doviz</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Doviz</span>(<span class="pl-smi">$cacheDriver</span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> USD Alış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurAlis(<span class="pl-s"><span class="pl-pds">"</span>USD<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> USD Satış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurSatis(<span class="pl-s"><span class="pl-pds">"</span>USD<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> EURO Efektif Alış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurAlis(<span class="pl-s"><span class="pl-pds">"</span>EUR<span class="pl-pds">"</span></span>, <span class="pl-c1">Doviz</span><span class="pl-k">::</span><span class="pl-c1">TYPE_EFEKTIFALIS</span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> EURO Efektif Satış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurSatis(<span class="pl-s"><span class="pl-pds">"</span>EUR<span class="pl-pds">"</span></span>, <span class="pl-c1">Doviz</span><span class="pl-k">::</span><span class="pl-c1">TYPE_EFEKTIFSATIS</span>);</span>
+<span class="pl-s1"></span></pre></div>
+
+<h3>
+<a id="doctrinecommoncachecacheprovider-harici-bir-önbellek-yapısı-kullanıyorum-ne-yapabilirim" class="anchor" href="#doctrinecommoncachecacheprovider-harici-bir-%C3%B6nbellek-yap%C4%B1s%C4%B1-kullan%C4%B1yorum-ne-yapabilirim" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Doctrine\Common\Cache\CacheProvider harici bir önbellek yapısı kullanıyorum. Ne yapabilirim?</h3>
+
+<p>Sınıfın oluşturduğu data değişkenini getData() fonksiyonu kendiniz saklayıp, tekrar kullanacağınızda setData($data) fonksiyonu ile sınıfa tekrar verebilirsiniz.</p>
+
+<p>Örnek: json_encode/json_decode ile önbelleğin bir dosyada tutulması</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$doviz</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">\Teknomavi\Tcmb\</span><span class="pl-c1">Doviz</span>();</span>
+<span class="pl-s1"><span class="pl-c">// Cache Kodları Başlangıç</span></span>
+<span class="pl-s1"><span class="pl-smi">$fileName</span> <span class="pl-k">=</span> <span class="pl-c1">dirname</span>(<span class="pl-c1">__FILE__</span>) <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">"</span>/data.json<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-k">if</span> (<span class="pl-c1">file_exists</span>(<span class="pl-smi">$fileName</span>)) {</span>
+<span class="pl-s1">    <span class="pl-smi">$data</span>       <span class="pl-k">=</span> <span class="pl-c1">json_decode</span>(<span class="pl-c1">file_get_contents</span>(<span class="pl-smi">$fileName</span>), <span class="pl-c1">true</span>);</span>
+<span class="pl-s1">    <span class="pl-smi">$cacheValid</span> <span class="pl-k">=</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>setData(<span class="pl-smi">$data</span>);</span>
+<span class="pl-s1">} <span class="pl-k">else</span> {</span>
+<span class="pl-s1">    <span class="pl-smi">$cacheValid</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>;</span>
+<span class="pl-s1">}</span>
+<span class="pl-s1"><span class="pl-k">if</span> (<span class="pl-k">!</span><span class="pl-smi">$cacheValid</span>) {</span>
+<span class="pl-s1">    <span class="pl-c1">file_put_contents</span>(<span class="pl-smi">$fileName</span>, <span class="pl-c1">json_encode</span>(<span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>getData()));</span>
+<span class="pl-s1">}</span>
+<span class="pl-s1"><span class="pl-c">// Cache Kodları Bitiş</span></span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> USD Alış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurAlis(<span class="pl-s"><span class="pl-pds">"</span>USD<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> USD Satış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurSatis(<span class="pl-s"><span class="pl-pds">"</span>USD<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> EURO Efektif Alış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurAlis(<span class="pl-s"><span class="pl-pds">"</span>EUR<span class="pl-pds">"</span></span>, <span class="pl-c1">\Teknomavi\Tcmb\</span><span class="pl-c1">Doviz</span><span class="pl-k">::</span><span class="pl-c1">TYPE_EFEKTIFALIS</span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> EURO Efektif Satış:<span class="pl-pds">"</span></span> <span class="pl-k">.</span> <span class="pl-smi">$doviz</span><span class="pl-k">-&gt;</span>kurSatis(<span class="pl-s"><span class="pl-pds">"</span>EUR<span class="pl-pds">"</span></span>, <span class="pl-c1">\Teknomavi\Tcmb\</span><span class="pl-c1">Doviz</span><span class="pl-k">::</span><span class="pl-c1">TYPE_EFEKTIFSATIS</span>);</span>
+<span class="pl-s1"></span></pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/teknomavi/tcmb/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/teknomavi/tcmb/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/teknomavi/tcmb"></a> is maintained by <a href="https://github.com/teknomavi">teknomavi</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
