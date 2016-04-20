@@ -1,4 +1,7 @@
-*.php diff=php
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+*.php diff=php eol=lf
 
 /docs export-ignore
 /tests export-ignore
