@@ -26,7 +26,7 @@ class Doviz
         "CNY" => "ÇİN YUANI",
         "PKR" => "PAKİSTAN RUPİSİ",
     );
-    /* KurTipleri */
+    /* Kur Tipleri */
     const TYPE_ALIS = "ForexBuying";
     const TYPE_EFEKTIFALIS = "BanknoteBuying";
     const TYPE_SATIS = "ForexSelling";
