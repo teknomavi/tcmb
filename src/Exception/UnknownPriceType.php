@@ -1,9 +1,8 @@
 <?php
 namespace Teknomavi\Tcmb\Exception;
 
-use \ErrorException;
+use ErrorException;
 
 class UnknownPriceType extends ErrorException
 {
-
 }

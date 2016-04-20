@@ -1,9 +1,8 @@
 <?php
 namespace Teknomavi\Tcmb\Exception;
 
-use \ErrorException;
+use ErrorException;
 
 class ConnectionFailed extends ErrorException
 {
-
 }

@@ -10,23 +10,23 @@ class DovizTest extends \PHPUnit_Framework_TestCase
      */
     public function testCacheProvider()
     {
-        $cacheMock = $this->getMock('\Doctrine\Common\Cache\CacheProvider', array('contains', 'fetch', 'doFetch', 'doContains', 'doSave', 'doDelete', 'doFlush', 'doGetStats'));
+        $cacheMock = $this->getMock('\Doctrine\Common\Cache\CacheProvider', ['contains', 'fetch', 'doFetch', 'doContains', 'doSave', 'doDelete', 'doFlush', 'doGetStats']);
         $cacheMock->expects($this->once())
             ->method('contains')
             ->will($this->returnValue(true));
         $cacheMock->expects($this->once())
             ->method('fetch')
-            ->will($this->returnValue(array(
-                'currencies' => array(
-                    'USD' => array(
-                        Doviz::TYPE_ALIS => 2.2,
-                        Doviz::TYPE_EFEKTIFALIS => 2.3,
-                        Doviz::TYPE_SATIS => 2.4,
+            ->will($this->returnValue([
+                'currencies' => [
+                    'USD' => [
+                        Doviz::TYPE_ALIS         => 2.2,
+                        Doviz::TYPE_EFEKTIFALIS  => 2.3,
+                        Doviz::TYPE_SATIS        => 2.4,
                         Doviz::TYPE_EFEKTIFSATIS => 2.5,
-                    ),
-                ),
-                'expire' => strtotime("+1 hour"),
-            )));
+                    ],
+                ],
+                'expire' => strtotime('+1 hour'),
+            ]));
         $doviz = new Doviz($cacheMock);
         $this->assertEquals($doviz->kurAlis('USD'), 2.2);
     }
@@ -39,7 +39,7 @@ class DovizTest extends \PHPUnit_Framework_TestCase
      */
     public function testConnectionFailed()
     {
-        $curlMock = $this->getMock('\Teknomavi\Common\Wrapper\Curl', array('setOption', 'exec', 'error'));
+        $curlMock = $this->getMock('\Teknomavi\Common\Wrapper\Curl', ['setOption', 'exec', 'error']);
         $curlMock->expects($this->any())
             ->method('setOption')
             ->will($this->returnValue(true));
@@ -48,7 +48,7 @@ class DovizTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(false));
         $curlMock->expects($this->once())
             ->method('error')
-            ->will($this->returnValue("Test Suite Sample Error"));
+            ->will($this->returnValue('Test Suite Sample Error'));
         $doviz = new Doviz();
         $data = $doviz->getData($curlMock);
         $this->assertTrue(isset($data['currencies']['USD']));
@@ -59,11 +59,12 @@ class DovizTest extends \PHPUnit_Framework_TestCase
      * @covers \Teknomavi\Tcmb\Doviz::getData
      * @covers \Teknomavi\Tcmb\Doviz::getTcmbData
      * @covers \Teknomavi\Tcmb\Doviz::formatTcmbData
+     *
      * @uses   \Teknomavi\Tcmb\Doviz::getTcmbData
      */
     public function testGetData()
     {
-        $cacheMock = $this->getMock('\Doctrine\Common\Cache\CacheProvider', array('contains', 'save', 'doFetch', 'doContains', 'doSave', 'doDelete', 'doFlush', 'doGetStats'));
+        $cacheMock = $this->getMock('\Doctrine\Common\Cache\CacheProvider', ['contains', 'save', 'doFetch', 'doContains', 'doSave', 'doDelete', 'doFlush', 'doGetStats']);
         $cacheMock->expects($this->once())
             ->method('contains')
             ->will($this->returnValue(false));
@@ -80,24 +81,25 @@ class DovizTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetData()
     {
-        $data = array(
-            'currencies' => array(
-                'USD' => array(
-                    Doviz::TYPE_ALIS => 2.2,
-                    Doviz::TYPE_EFEKTIFALIS => 2.3,
-                    Doviz::TYPE_SATIS => 2.4,
+        $data = [
+            'currencies' => [
+                'USD' => [
+                    Doviz::TYPE_ALIS         => 2.2,
+                    Doviz::TYPE_EFEKTIFALIS  => 2.3,
+                    Doviz::TYPE_SATIS        => 2.4,
                     Doviz::TYPE_EFEKTIFSATIS => 2.5,
-                ),
-            ),
-            'expire' => strtotime("+1 hour"),
-        );
+                ],
+            ],
+            'expire' => strtotime('+1 hour'),
+        ];
         $doviz = new Doviz();
         $this->assertTrue($doviz->setData($data));
-        $this->assertFalse($doviz->setData(array()));
+        $this->assertFalse($doviz->setData([]));
     }
 
     /**
      * @covers \Teknomavi\Tcmb\Doviz::getCurrencyExchangeRate
+     *
      * @uses   \Teknomavi\Tcmb\Doviz::getData
      * @expectedException \Teknomavi\Tcmb\Exception\UnknownCurrencyCode
      */
@@ -109,19 +111,21 @@ class DovizTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \Teknomavi\Tcmb\Doviz::getCurrencyExchangeRate
+     *
      * @uses   \Teknomavi\Tcmb\Doviz::getData
      * @expectedException \Teknomavi\Tcmb\Exception\UnknownPriceType
      */
     public function testUnknownPriceType()
     {
         $doviz = new Doviz();
-        $doviz->getCurrencyExchangeRate('USD', "FAIL");
+        $doviz->getCurrencyExchangeRate('USD', 'FAIL');
     }
 
     /**
      * @covers \Teknomavi\Tcmb\Doviz::getCurrencyExchangeRate
      * @covers \Teknomavi\Tcmb\Doviz::kurAlis
      * @covers \Teknomavi\Tcmb\Doviz::kurSatis
+     *
      * @uses   \Teknomavi\Tcmb\Doviz::getData
      */
     public function testGetCurrencyExchangeRate()
