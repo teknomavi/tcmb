@@ -6,6 +6,8 @@ linting: true
 
 enabled:
   - concat_with_spaces
+  - linebreak_after_opening_tag
 
 disabled:
   - concat_without_spaces
+  - blank_line_after_opening_tag
