@@ -23,7 +23,7 @@
   },
   "require": {
     "php": "> 5.4",
-    "teknomavi/common": "dev-master"
+    "teknomavi/common": "~2.0"
   },
   "require-dev": {
     "doctrine/cache": "1.5.x-dev",
