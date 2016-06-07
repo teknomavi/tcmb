@@ -27,7 +27,7 @@
   },
   "require-dev": {
     "doctrine/cache": "1.5.x-dev",
-    "phpunit/phpunit": "4.8.x-dev",
+    "phpunit/phpunit": "~4.8|~5.0",
     "squizlabs/php_codesniffer": "~2.0"
   },
   "suggest": {
@@ -40,7 +40,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Teknomavi\\Tcmb\\": "tests/"
+      "Teknomavi\\Tests\\": "tests/Teknomavi/Tests"
     }
   }
 }

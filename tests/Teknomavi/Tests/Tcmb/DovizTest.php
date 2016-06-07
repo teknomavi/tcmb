@@ -1,5 +1,7 @@
 <?php
-namespace Teknomavi\Tcmb;
+namespace Teknomavi\Tests\Tcmb;
+
+use Teknomavi\Tcmb\Doviz;
 
 class DovizTest extends \PHPUnit_Framework_TestCase
 {
