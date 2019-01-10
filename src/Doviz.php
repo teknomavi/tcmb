@@ -120,7 +120,7 @@ class Doviz
             foreach ($data['Currency'] as $currency) {
                 $currency = (array)$currency;
                 $currencyCode = $currency['@attributes']['CurrencyCode'];
-                if (in_array($currencyCode, $this->ignoredCurrencies)) {
+                if (!in_array($currencyCode, $this->ignoredCurrencies)) {
                     $currencies[$currencyCode] = [
                         self::TYPE_ALIS => $currency[self::TYPE_ALIS] / $currency['Unit'],
                         self::TYPE_EFEKTIFALIS => $currency[self::TYPE_EFEKTIFALIS] / $currency['Unit'],
