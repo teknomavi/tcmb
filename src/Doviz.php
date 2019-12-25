@@ -1,4 +1,5 @@
 <?php
+
 namespace Teknomavi\Tcmb;
 
 use Teknomavi\Common\Wrapper\Curl;
@@ -92,7 +93,7 @@ class Doviz
             throw new Exception\ConnectionFailed('Sunucu Bağlantısı Kurulamadı: ' . $curl->error());
         }
         $curl->close();
-        $this->data = $this->formatTcmbData((array) simplexml_load_string($response));
+        $this->data = $this->formatTcmbData((array)simplexml_load_string($response));
         $timezone = new \DateTimeZone('Europe/Istanbul');
         $now = new \DateTime('now', $timezone);
         $expire = $this->data['today'] == $now->format('d.m.Y') ? 'Tomorrow 15:30' : 'Today 15:30';
@@ -117,22 +118,21 @@ class Doviz
         $currencies = [];
         if (isset($data['Currency']) && count($data['Currency'])) {
             foreach ($data['Currency'] as $currency) {
-                $currency = (array) $currency;
+                $currency = (array)$currency;
                 $currencyCode = $currency['@attributes']['CurrencyCode'];
-                if (in_array($currencyCode, $this->ignoredCurrencies)) {
-                    continue;
+                if (!in_array($currencyCode, $this->ignoredCurrencies)) {
+                    $currencies[$currencyCode] = [
+                        self::TYPE_ALIS => $currency[self::TYPE_ALIS] / $currency['Unit'],
+                        self::TYPE_EFEKTIFALIS => $currency[self::TYPE_EFEKTIFALIS] / $currency['Unit'],
+                        self::TYPE_SATIS => $currency[self::TYPE_SATIS] / $currency['Unit'],
+                        self::TYPE_EFEKTIFSATIS => $currency[self::TYPE_EFEKTIFSATIS] / $currency['Unit'],
+                    ];
                 }
-                $currencies[$currencyCode] = [
-                    self::TYPE_ALIS         => $currency[self::TYPE_ALIS] / $currency['Unit'],
-                    self::TYPE_EFEKTIFALIS  => $currency[self::TYPE_EFEKTIFALIS] / $currency['Unit'],
-                    self::TYPE_SATIS        => $currency[self::TYPE_SATIS] / $currency['Unit'],
-                    self::TYPE_EFEKTIFSATIS => $currency[self::TYPE_EFEKTIFSATIS] / $currency['Unit'],
-                ];
             }
         }
 
         return [
-            'today'      => $data['@attributes']['Tarih'],
+            'today' => $data['@attributes']['Tarih'],
             'currencies' => $currencies,
         ];
     }
@@ -193,7 +193,7 @@ class Doviz
             case self::TYPE_SATIS:
             case self::TYPE_EFEKTIFALIS:
             case self::TYPE_EFEKTIFSATIS:
-                return (float) $this->data['currencies'][$currency][$type];
+                return (float)$this->data['currencies'][$currency][$type];
             default:
                 throw new Exception\UnknownPriceType('Tanımlanamayan Kur Tipi: ' . $type);
         }
