@@ -84,7 +84,7 @@ class Doviz
         if (is_null($curl)) {
             $curl = new Curl();
         }
-        $curl->setOption(CURLOPT_URL, 'http://www.tcmb.gov.tr/kurlar/today.xml');
+        $curl->setOption(CURLOPT_URL, 'https://www.tcmb.gov.tr/kurlar/today.xml');
         $curl->setOption(CURLOPT_HEADER, 0);
         $curl->setOption(CURLOPT_RETURNTRANSFER, 1);
         $curl->setOption(CURLOPT_FOLLOWLOCATION, 1);
