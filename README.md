@@ -1,6 +1,6 @@
 # T.C. Merkez Bankası Kur Kütüphanesi [![Build Status](https://travis-ci.org/teknomavi/tcmb.svg?branch=master)](https://travis-ci.org/teknomavi/tcmb)
 ## Teknomavi\Tcmb Nedir?
-T.C. Merkez Bankası tarafından http://www.tcmb.gov.tr/kurlar/today.xml adresinde yayınlanan güncel döviz kurlarını okumak için kullanılan açık kaynak bir PHP kütüphanesidir.
+T.C. Merkez Bankası tarafından https://www.tcmb.gov.tr/kurlar/today.xml adresinde yayınlanan güncel döviz kurlarını okumak için kullanılan açık kaynak bir PHP kütüphanesidir.
 
 ## Neler Yapılabilir?
 Bu kütüphane ile günlük döviz kurları otomatik olarak çekilmektedir.
