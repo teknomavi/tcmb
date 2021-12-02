@@ -72,3 +72,29 @@ echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", \Teknomavi\Tcmb\Doviz::TYP
 echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", \Teknomavi\Tcmb\Doviz::TYPE_EFEKTIFSATIS);
 
 ```
+
+Örnek: Laravel kullanarak `json_encode`/`json_decode` ile önbelleğin bir dosyada tutulması
+
+```php
+use Storage;
+ 
+$doviz = new Doviz();
+
+// Cache Kodları Başlangıç
+$path = 'doviz-cache/doviz.json';
+if (Storage::exists($path)) {
+     $data = json_decode(Storage::get($path), true);
+     $cache_valid = $doviz->setData($data);
+} else {
+     $cache_valid = false;
+}
+if (!$cache_valid) {
+     Storage::put($path, json_encode($doviz->getData()));
+}
+// Cache Kodları Bitiş
+ 
+echo " USD Alış:" . $doviz->kurAlis("USD");
+echo " USD Satış:" . $doviz->kurSatis("USD");
+echo " EURO Efektif Alış:" . $doviz->kurAlis("EUR", \Teknomavi\Tcmb\Doviz::TYPE_EFEKTIFALIS);
+echo " EURO Efektif Satış:" . $doviz->kurSatis("EUR", \Teknomavi\Tcmb\Doviz::TYPE_EFEKTIFSATIS);
+```
