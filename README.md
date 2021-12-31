@@ -8,7 +8,12 @@ TCMB sitesinde yayınlanan tüm kurlar için mevcut "Alış", "Satış", "Efekti
 
 ## Nasıl Kullanılır?
 Teknomavi\Tcmb Composer ile kurulabilir.
-Projenizdeki `composer.json` dosyasında `require` bölümüne `"teknomavi/tcmb": "dev-master"` eklemeniz ve `composer update` komutunu çalıştırmanız yeterlidir.
+Projenizdeki `composer.json` dosyasında `require` bölümüne `"teknomavi/tcmb": "dev-master"` eklemeniz ve `composer update` komutunu çalıştırmanız yeterlidir. 
+
+Dilerseniz aşağıdaki komutu da çalıştırabilirsiniz.
+```php
+composer require teknomavi/tcmb
+```
 
 Composer kurulumu/kullanımı hakkında bilgiye ihtiyacınız varsa [bu bağlantıdaki](http://www.teknomavi.com/yazilim/php/composer-paket-yoneticisi-nedir-nasil-kurulur-nasil-kullanilir/) dökümanı incelebilirsiniz.
 
